@@ -1,0 +1,1 @@
+window.inbound = require('inbound');
