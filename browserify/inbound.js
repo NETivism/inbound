@@ -50,7 +50,7 @@ var querystring = require("querystring");
 module.exports = function (href, referrer, callback) {
 
   if (referrer.host && referrer.host.indexOf('google') !== -1 &&
-      href.href.indexOf("utm_medium=cpc") !== -1) {
+     ( href.href.indexOf("utm_medium=cpc") !== -1 || href.href.indexOf("gclid=") !== -1 )) {
          
     var description = {
       type: 'ad',
