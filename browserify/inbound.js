@@ -5,7 +5,7 @@ window.inbound = require('inbound');
 
 exports.referrer    = require('./lib/referrer');
 
-},{"./lib/referrer":35}],3:[function(require,module,exports){
+},{"./lib/referrer":36}],3:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -22,7 +22,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],4:[function(require,module,exports){
+},{"querystring":41}],4:[function(require,module,exports){
 var querystring = require("querystring");
 
 module.exports = function (href, referrer, callback) {
@@ -44,7 +44,7 @@ module.exports = function (href, referrer, callback) {
 
 };
 
-},{"querystring":40}],5:[function(require,module,exports){
+},{"querystring":41}],5:[function(require,module,exports){
 var querystring = require("querystring");
 
 module.exports = function (href, referrer, callback) {
@@ -66,7 +66,7 @@ module.exports = function (href, referrer, callback) {
 
 };
 
-},{"querystring":40}],6:[function(require,module,exports){
+},{"querystring":41}],6:[function(require,module,exports){
 var querystring = require("querystring");
 
 module.exports = function (href, referrer, callback) {
@@ -87,7 +87,7 @@ module.exports = function (href, referrer, callback) {
 
 };
 
-},{"querystring":40}],7:[function(require,module,exports){
+},{"querystring":41}],7:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -105,7 +105,7 @@ module.exports = function (href, referrer, callback) {
 
 };
 
-},{"querystring":40}],8:[function(require,module,exports){
+},{"querystring":41}],8:[function(require,module,exports){
 
 /**
  * Fall through direct url matcher
@@ -190,18 +190,20 @@ module.exports = function (href, referrer, callback) {
 },{}],13:[function(require,module,exports){
 
 module.exports = function (href, referrer, callback) {
-
-  if (href.href && href.href.indexOf("utm_medium=email") !== -1) {
+  if (href.href && (href.href.indexOf("utm_medium=email") !== -1 || href.href.indexOf("civimail_x_q=") !== -1)) {
+    var client = 'unknown';
+    if (href.href.indexOf('civimail_x_q')) {
+      var client = 'civimail';
+    }
     return callback(null, {
       type: 'email',
-      client: 'unknown',
+      client: client,
       from: referrer.href,
       link: href.href
     });
   } else {
     return callback(null, false);
   }
-
 };
 
 },{}],14:[function(require,module,exports){
@@ -243,6 +245,7 @@ module.exports = [
 	require('./social/facebook'),
 	require('./social/line'),
 	require('./social/hangouts'),
+  require('./social/youtube'),
 	require('./social/linkedin'),
 	require('./social/pinterest'),
 	require('./social/twitter'),
@@ -269,7 +272,7 @@ module.exports = [
 
 ];
 
-},{"./ad/bing":3,"./ad/facebook":4,"./ad/google":5,"./ad/others":6,"./ad/yahoo":7,"./direct/direct":8,"./email/daum":9,"./email/gmail":10,"./email/hotmail":11,"./email/naver":12,"./email/others":13,"./email/yahoo":14,"./internal/internal":16,"./link/link":17,"./search/aol":18,"./search/baidu":19,"./search/bing":20,"./search/daum":21,"./search/google":22,"./search/nate":23,"./search/naver":24,"./search/yahoo":25,"./search/yandex":26,"./social/facebook":27,"./social/hangouts":28,"./social/line":29,"./social/linkedin":30,"./social/me2day":31,"./social/pinterest":32,"./social/twitter":33,"./unknown/unknown":34}],16:[function(require,module,exports){
+},{"./ad/bing":3,"./ad/facebook":4,"./ad/google":5,"./ad/others":6,"./ad/yahoo":7,"./direct/direct":8,"./email/daum":9,"./email/gmail":10,"./email/hotmail":11,"./email/naver":12,"./email/others":13,"./email/yahoo":14,"./internal/internal":16,"./link/link":17,"./search/aol":18,"./search/baidu":19,"./search/bing":20,"./search/daum":21,"./search/google":22,"./search/nate":23,"./search/naver":24,"./search/yahoo":25,"./search/yandex":26,"./social/facebook":27,"./social/hangouts":28,"./social/line":29,"./social/linkedin":30,"./social/me2day":31,"./social/pinterest":32,"./social/twitter":33,"./social/youtube":34,"./unknown/unknown":35}],16:[function(require,module,exports){
 
 
 module.exports = function (href, referrer, callback) {
@@ -316,7 +319,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],19:[function(require,module,exports){
+},{"querystring":41}],19:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -332,7 +335,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],20:[function(require,module,exports){
+},{"querystring":41}],20:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -348,7 +351,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],21:[function(require,module,exports){
+},{"querystring":41}],21:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -364,7 +367,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],22:[function(require,module,exports){
+},{"querystring":41}],22:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -383,7 +386,7 @@ module.exports = function (href, referrer, callback) {
 
 };
 
-},{"querystring":40}],23:[function(require,module,exports){
+},{"querystring":41}],23:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -399,7 +402,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],24:[function(require,module,exports){
+},{"querystring":41}],24:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -415,7 +418,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],25:[function(require,module,exports){
+},{"querystring":41}],25:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -436,7 +439,7 @@ module.exports = function (href, referrer, callback) {
   }
 };
 
-},{"querystring":40}],26:[function(require,module,exports){
+},{"querystring":41}],26:[function(require,module,exports){
 
 var querystring = require('querystring');
 
@@ -452,7 +455,7 @@ module.exports = function (href, referrer, callback) {
   }
 
 };
-},{"querystring":40}],27:[function(require,module,exports){
+},{"querystring":41}],27:[function(require,module,exports){
 
 module.exports = function (href, referrer, callback) {
 
@@ -569,11 +572,26 @@ module.exports = function (href, referrer, callback) {
 };
 },{}],34:[function(require,module,exports){
 
+module.exports = function (href, referrer, callback) {
+
+  if (referrer.host && referrer.host.indexOf('youtube.com') !== -1) {
+    return callback(null, {
+      type: 'social',
+      network: 'youtube'
+    });
+  } else {
+    return callback(null, false);
+  }
+
+};
+
+},{}],35:[function(require,module,exports){
+
 
 module.exports = function (href, referrer, callback) {
   return callback(null, { type: 'unknown' });
 };
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 (function (process){
 
 
@@ -658,7 +676,7 @@ var parseCampaign = function parseCampaign (href, referrer, callback) {
 };
 
 }).call(this,require('_process'))
-},{"./matchers":15,"_process":36,"querystring":40,"url":41}],36:[function(require,module,exports){
+},{"./matchers":15,"_process":37,"querystring":41,"url":42}],37:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -844,7 +862,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
@@ -1381,7 +1399,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1467,7 +1485,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1554,13 +1572,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":38,"./encode":39}],41:[function(require,module,exports){
+},{"./decode":39,"./encode":40}],42:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2294,7 +2312,7 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 
-},{"./util":42,"punycode":37,"querystring":40}],42:[function(require,module,exports){
+},{"./util":43,"punycode":38,"querystring":41}],43:[function(require,module,exports){
 'use strict';
 
 module.exports = {
